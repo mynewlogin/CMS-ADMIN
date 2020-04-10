@@ -1,0 +1,27 @@
+
+-
+  name: CMS1 Play
+  gather_facts: no
+  hosts: cms
+  tasks:
+   - name: cms1 version
+     raw: version
+     register: responce
+
+
+   - name: CMS version
+     debug:
+             msg: "{{ responce.stdout_lines[0] }}"
+
+
+
+   - name: cms check MAC
+     raw: ipv4 a
+     register: responce
+
+
+   - name: Debug output (CMS mac)
+     debug:
+             msg: "{{ responce.stdout_lines[6].split('      ')[1]|trim }}"
+
+
